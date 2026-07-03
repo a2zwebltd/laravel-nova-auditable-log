@@ -1,23 +1,15 @@
 let mix = require('laravel-mix')
-let path = require('path')
-const tailwindcss = require('tailwindcss')
+let NovaExtension = require('laravel-nova-devtool')
 
-mix.alias({
-    'laravel-nova': path.join(__dirname, '../../vendor/laravel/nova/resources/js/mixins/packages.js'),
+mix.extend('nova', new NovaExtension())
+
+mix.options({
+  progress: false
 })
 
-mix.js('resources/js/tool.js', 'js').vue({ version: 3 })
-    .webpackConfig({
-        externals: {
-            vue: 'Vue',
-        },
-        output: {
-            uniqueName: 'vendor/auditable-log',
-        }
-    })
-    .setPublicPath('dist')
-    .sass('resources/sass/tool.scss', 'css')
-    .options({
-        processCssUrls: false,
-        postCss: [ tailwindcss('tailwind.config.js') ],
-    })
+mix
+  .setPublicPath('dist')
+  .js('resources/js/tool.js', 'js')
+  .vue({ version: 3 })
+  .nova('devpartners/auditable-log')
+  .version()

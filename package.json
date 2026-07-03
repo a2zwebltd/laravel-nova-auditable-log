@@ -10,17 +10,15 @@
         "production": "mix --production"
     },
     "devDependencies": {
+        "laravel-nova-devtool": "file:vendor/laravel/nova-devtool",
         "@vue/compiler-sfc": "^3.2.22",
         "laravel-mix": "^6.0.41",
-        "laravel-mix-purgecss": "^6.0",
+        "lodash": "^4.17.21",
         "postcss": "^8.3.11",
-        "sass": "^1.52.2",
-        "sass-loader": "^12.6.0",
-        "vue-loader": "^16.8.3",
-        "webpack-cli": "^4.9.2"
+        "vue": "^3.2.22",
+        "vue-loader": "^16.8.3"
     },
-    "dependencies": {
-        "tailwindcss": "^3.0",
-        "vue": "^3.0"
+    "overrides": {
+        "webpackbar": "^7.0.0"
     }
 }

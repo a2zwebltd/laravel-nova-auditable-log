@@ -43,7 +43,7 @@ class AuditController
 
         $audit = $record->audits()->where($auditor->getTable() . '.' . $auditor->getKeyName(), $auditId)->firstOrFail();
 
-        $record->fill(Arr::only($audit->new_values, $request->input('restore', [])));
+        $record->forceFill(Arr::only($audit->old_values, $request->input('restore', [])));
         $record->save();
 
         return response()->json(['status' => 'OK', 'record' => $record]);
