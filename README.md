@@ -37,7 +37,9 @@ The latest version of this package (^2.0) is compatible with Laravel Nova 4. If 
 
 ## Policies
 
-There are two policy gates available that you can implement on your resources' policy. 
+There are two policy gates available that you can implement on your resources' policy, or define globally with `Gate::define()`.
+
+Viewing audits also requires the user to be able to view the Nova resource, and restoring requires them to be able to update it. By default, `audit` allows access and `audit_restore` denies it.
 
 
 ```php

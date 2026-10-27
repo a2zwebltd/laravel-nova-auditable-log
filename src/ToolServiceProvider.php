@@ -17,15 +17,10 @@ class ToolServiceProvider extends ServiceProvider
     {
         $this->app->booted(function () {
             $this->routes();
-
-            // By default logged in users can audit and restore
-            Gate::define('audit', function ($user, $resource) {
-                return true;
-            });
-            Gate::define('audit_restore', function ($user, $resource) {
-                return true;
-            });
         });
+
+        Gate::define('audit', fn ($user, $resource)  => true);
+        Gate::define('audit_restore', fn ($user, $resource)  => false);
 
         Nova::serving(function (ServingNova $event) {
             Nova::script('auditable-log', __DIR__ . '/../dist/js/tool.js');
@@ -69,7 +64,7 @@ class ToolServiceProvider extends ServiceProvider
             return;
         }
 
-        Route::middleware(['nova'])
+        Route::middleware(['nova:api'])
             ->prefix('nova-vendor/auditable-log')
             ->group(__DIR__ . '/../routes/api.php');
     }
